@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   old_get_next_lines_utils.c                         :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nraiman <nraiman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 17:19:21 by nraiman           #+#    #+#             */
-/*   Updated: 2022/01/28 18:33:33 by nraiman          ###   ########.fr       */
+/*   Updated: 2022/01/28 16:43:51 by nraiman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "get_next_line.h"
+#include "get_next_line.h"
 
 int	gnl_strlen(char *str)
 {
@@ -56,21 +56,13 @@ char	*gnl_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	if (s1)
-	{
-		while (s1[i])
-		{
+		while (s1[i++])
 			str[j++] = s1[i];
-			i++;
-		}
-	}
 	i = 0;
-	if (s2)
+	while (s2[i])
 	{
-		while (s2[i])
-		{
-			str[j++] = s2[i];
-			i++;
-		}
+		str[j++] = s2[i];
+		i++;
 	}
 	str[j] = '\0';
 	if (s1)
@@ -88,11 +80,7 @@ char	*chop_line(char *remainder)
 	length = 0;
 	while (remainder[length] && remainder[length] != '\n')
 		length++;
-	if (remainder[length] == '\n')
-		length++;
-	if (length == 0)
-		return (NULL);
-	line = (char *)malloc((length + 1) * (sizeof (char)));
+	line = (char *)malloc((length + 2) * (sizeof (char)));
 	if (!line)
 		return (NULL);
 	length = 0;
@@ -112,32 +100,28 @@ char	*chop_line(char *remainder)
 
 char	*chop_remainder(char *remainder)
 {
-	int		length;
 	int		i;
-	char	*new_remainder;
+	int		j;
+	char	*str;
 
 	if (!remainder)
 		return (NULL);
-	length = 0;
-	while (remainder[length] && remainder[length] != '\n')
-		length++;
-	if (remainder[length] == '\n')
-		length++;
-	if (!remainder[length])
+	i = 0;
+	while (remainder[i] && remainder[i] != '\n')
+		i++;
+	if (!remainder[i])
 	{
 		free(remainder);
 		return (NULL);
 	}
-	new_remainder = (char *)malloc((gnl_strlen(remainder) - length + 1) * (sizeof (char)));
-	if (!new_remainder)
+	str = (char *)malloc(sizeof (char) * (gnl_strlen(remainder) - i + 1));
+	if (!str)
 		return (NULL);
-	i = 0;
-	while (remainder[length + i])
-	{
-		new_remainder[i] = remainder[length + i];
-		i++;
-	}
-	new_remainder[i] = '\0';
+	i++;
+	j = 0;
+	while (remainder[i])
+		str[j++] = remainder[i++];
+	str[j] = '\0';
 	free(remainder);
-	return (new_remainder);
+	return (str);
 }
