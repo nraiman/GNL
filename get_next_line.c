@@ -21,7 +21,7 @@ char	*read_extend(int fd, char *buff, char *remainder)
 	ssize_t	read_bytes;
 
 	read_bytes = 1;
-	while (read_bytes > 0 && !gnl_strchr(remainder, '\n'))
+	while (read_bytes > 0 && gnl_strchr(remainder, '\n') == -1)
 	{
 		read_bytes = read(fd, buff, BUFFER_SIZE);
 		if (read_bytes > 0)
@@ -47,7 +47,7 @@ char	*get_next_line(int fd)
 	remainder = read_extend (fd, buff, remainder);
 	free (buff);
 	line = chop_line(remainder);
-	remainder = chop_remainder(remainder);
+	remainder = chop_remainder(remainder, 0, 0);
 	return (line);
 }
 
