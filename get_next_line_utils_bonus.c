@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nraiman <nraiman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 17:19:21 by nraiman           #+#    #+#             */
-/*   Updated: 2022/02/07 11:42:05 by nraiman          ###   ########.fr       */
+/*   Created: 2022/02/07 11:51:20 by nraiman           #+#    #+#             */
+/*   Updated: 2022/02/07 18:10:10 by nraiman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	gnl_strlen(char *str)
 {
@@ -56,8 +56,8 @@ char	*gnl_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	if (s1)
-		while (s1[i])
-			str[j++] = s1[i++];
+		while (s1[i++])
+			str[j++] = s1[i];
 	i = 0;
 	while (s2[i])
 	{

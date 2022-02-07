@@ -15,6 +15,5 @@ int main(int argc, char **argv)
         str = get_next_line(fd);
     }
     free(str);
-}
 	return (0);
-
+}
