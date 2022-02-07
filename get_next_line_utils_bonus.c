@@ -56,8 +56,8 @@ char	*gnl_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	if (s1)
-		while (s1[i++])
-			str[j++] = s1[i];
+		while (s1[i])
+			str[j++] = s1[i++];
 	i = 0;
 	while (s2[i])
 	{

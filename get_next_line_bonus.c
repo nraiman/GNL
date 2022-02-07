@@ -39,22 +39,14 @@ char	*get_next_line(int fd)
 	char		*buff;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
+	if (fd == -1)
 		return (NULL);
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
 	remainder[fd] = read_extend (fd, buff, remainder[fd]);
-	if (!remainder[fd])
-		return (NULL);
-	if (!remainder[fd][0])
-	{
-		free(remainder[fd]);
-		remainder[fd] = NULL;
-		return (NULL);
-	}
 	free (buff);
 	line = chop_line(remainder[fd]);
-	remainder[fd]= chop_remainder(remainder[fd], 0, 0);
+	remainder[fd] = chop_remainder(remainder[fd], 0, 0);
 	return (line);
 }
